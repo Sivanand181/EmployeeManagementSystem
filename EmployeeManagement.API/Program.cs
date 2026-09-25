@@ -14,5 +14,6 @@ builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 var app = builder.Build();
 using (var scope = app.Services.CreateScope()) { var db = scope.ServiceProvider.GetRequiredService<AppDbContext>(); db.Database.EnsureCreated(); SeedData.Initialize(db); }
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseSwagger(); app.UseSwaggerUI(); app.UseHttpsRedirection(); app.MapControllers(); app.Run();
+app.UseSwagger(); app.UseSwaggerUI(); app.UseHttpsRedirection(); app.UseDefaultFiles();
+app.UseStaticFiles(); app.MapControllers(); app.Run();
 public partial class Program { }
